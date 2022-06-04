@@ -1,129 +1,268 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+from os import system
+from random import randint
 
-# C extensions
-*.so
+gametitle="Dark Fort"
+system("mode 110,30")
+system('title'+gametitle)
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-pip-wheel-metadata/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
+def cls():
+    system(cls)
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
+character_race=None
+character_name=None
+character_class=None
+character_strenth=None
+character_dexterity=None
+character_magic=None
+character_life=None
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+cls()
+print('Dark Fort')
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
+def Intro():
+    print("")
+    print("In this game you are the hero and you have to save your friends from the evil sorceror financefairy")
+    print("Your choice and skills will have an impact on the gameplay of the game.")
+    print("")
+    input("Press Enter to Start...")
 
-# Translations
-*.mo
-*.pot
+Intro()
 
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
+def createcharacter():
+    cls()
+    global character_name
+    character_name=input("""
+    Let's begin by creating your character.
+    What is your character name?
 
-# Flask stuff:
-instance/
-.webassets-cache
+    >""")
+    global character_race
+    while character_race is None:
+        race_choice=input("""
+    Choose a race from the options given by entering the relecant number:
+    1) Elf
+    2) Dwarf
+    >""")
+    if race_choice==1:
+        character_race="Elf"
 
-# Scrapy stuff:
-.scrapy
+    elif race_choice==2:
+      character_race="Dwarf"
 
-# Sphinx documentation
-docs/_build/
+    else:
+        print("Not a valid option, Try Again.")
 
-# PyBuilder
-target/
+    while character_class is None:
+        class_choice=input("""
 
-# Jupyter Notebook
-.ipynb_checkpoints
+    Choose a race from the options given by entering the relecant number:
+    1) Warrior
+    2) Wizard
+    >""")
+    if class_choice==1:
+        character_race="Warrior"
 
-# IPython
-profile_default/
-ipython_config.py
+    elif class_choice==2:
+      character_race="Wizard"
 
-# pyenv
-.python-version
+    else:
+        print("Not a valid option, Try Again.")
 
-# pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
-#Pipfile.lock
+createcharacter()
 
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow
-__pypackages__/
+def create_character_skill_sheet():
+    cls()
+    global character_name, character_race, character_class, character_strenth, character_magic, character_dexterity, character_life
+    print("""
+    In this game, your character has 4 skills:
+                       1) Strenth - which will be used in the combat
+                       2) Magic - which will be used to cast a spell
+                       3) Dexterity - which will be used in ability tests
+                       4) Life - which will determine your character's health points
 
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
+Depending on your race and class you will have different levels of skills but you will be able to upgrade them in a bit.
 
-# SageMath parsed files
-*.sage.py
+Here is your character's skillsheet:
+""")
 
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+character_strenth=5
+character_magic=0
+character_dexterity=3
+character_life=10
 
-# Spyder project settings
-.spyderproject
-.spyproject
+if character_race=="Elf":
+    character_strenth+=3
+    character_magic+=6
+    character_dexterity+=4
+    character_life+=2
 
-# Rope project settings
-.ropeproject
+elif character_race=="Dwarf":
+    character_strenth+=5
+    character_life+=4
 
-# mkdocs documentation
-/site
+if character_class=="Warrior":
+    character_strenth+=3
+    character_life+=3
 
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
+elif character_class=="Wizard":
+    character_magic+=4
 
-# Pyre type checker
-.pyre/
+print("""
+Name: """ +character_name+"""
+
+Race: """ + character_race+"""
+
+Class: """ + character_class+"""
+
+
+Strenth:"""+ str(character_strenth)+"""
+
+Dexterity: """+ str(character_dexterity)+"""
+
+Magic: """+ str(character_magic)+"""
+
+Life: """+ str(character_life))
+
+input("Press Enter to apply skill modifiers.")
+
+create_character_skill_sheet()
+
+def modify_skills():
+    cls()
+    global character_strenth, character_dexterity, character_life
+    print("To increase your skills, roll a die for each of your skills.")
+    input("Press Enter to roll for strength")
+    roll=randint(1,6)
+    print("You rolled "+roll)
+    character_strenth+=roll
+    input("Press Enter to roll for dexterity")
+    roll=randint(1,6)
+    print("You rolled "+roll)
+    character_dexterity+=roll
+    input("Press Enter to roll for life")
+    roll=randint(1,6)
+    print("You rolled "+roll)
+    character_life+=roll
+    input("Press Enter to continue...")
+    cls()
+    print("""
+    Congratulations! You have made your character.
+
+
+    Name: """ +character_name+"""
+
+    Race: """ + character_race+"""
+
+    Class: """ + character_class+"""
+
+
+    Strenth:"""+ str(character_strenth)+"""
+
+    Dexterity: """+ str(character_dexterity)+"""
+
+    Magic: """+ str(character_magic)+"""
+
+    Life: """+ str(character_life))
+
+    input("Press Enter to begin your adventure...")
+
+def scene1():
+    cls()
+    choice=None
+    while choice is None:
+        user_input=input("""
+        You have entered the Dark Fort.
+        It is Dark but you have your torch with you. Now you can either turn left or turn right. What would you do?
+        1) Turn left
+        2) Turn right
+        >""")
+
+        if user_input=="1":
+                choice=1
+                scene2()
+        elif user_input=="2":
+                choice=2
+                scene3()
+        else:
+                print("Not a valid choice. Type a number.")
+
+def scene2():
+    cls()
+    choice=None
+    while choice is None:
+       user_input=input("""
+       From the darkness behind you, you hear a noise. Wht would you like to do?
+       1) Keep moving forward
+       2) Stop to listen
+       >""")
+
+       if user_input=="1":
+                choice=1
+                combat()
+       elif user_input=="2":
+                choice=2
+                skillcheck()
+       else:
+                print("Not a valid choice. Type a number.")
+
+def scene3():
+    cls()
+    choice=None
+    while choice is None:
+       user_input=input("""
+       From the darkness in front of you, you hear a noise. Wht would you like to do?
+       1) Keep moving forward
+       2) Stop to listen
+       >""")
+
+       if user_input=="1":
+                choice=1
+                combat()
+       elif user_input=="2":
+                choice=2
+                skillcheck()
+       else:
+                print("Not a valid choice. Type a number.")
+
+def skillcheck():
+    cls()
+    input("A giant rock falls from above on you. Roll a dice to see if you can dodge it.")
+    roll=randit(1,6)
+    print("You rolled "+roll)
+    if (character_dexterity+roll)>10:
+        print("""You dodged the rock and survived.
+        The strange noise continues and feels a lot close now.""")
+        input("Press Enter to continue...")
+        combat()
+    else:
+        print("You are smashed by a rock. You died you loser!!!")
+        print("Press Enter to exit the game")
+
+def combat():
+    cls()
+    global character_life
+    print("A horibble orc attack you!!!")
+    input("Press Enter to combat...")
+    orc=[10,14]
+    #orc life is 14 and Strenth is 10
+    while orc[1]>0 or character_life>0:
+        char_roll=randint()
+        print("You rolled "+ char_roll)
+        monst_roll=randint()
+        print("Monster rolled "+ monst_roll)
+
+        if char_roll+character_strenth>=monst_roll+orc[10]:
+            print("You hit the monster!")
+            orc[1]=orc[1]=randint()
+        else:
+           print("The monster hit you!")
+           character_life=character_life-randint()
+
+    if character_life>0:
+        print("You defeated the orc. Congratulations!")
+        input("Press Enter to exit the game...")
+    else:
+        print("The orc defeated you. Now it will feast on your flesh.")
+        input("Press Enter to exit the game...")
+
+scene1()
